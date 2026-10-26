@@ -1,0 +1,108 @@
+AGENDA DE DEMANDAS — v1.2
+Desenvolvido por Hugo L. B. Santos
+==========================================================
+
+O QUE TEM NESTA PASTA
+---------------------
+index.html ............ a agenda inteira (telas, regras e banco de dados)
+manifest.json ......... "carteira de identidade" do app (nome, cores, ícones)
+service-worker.js ..... guarda o app no aparelho para abrir sem internet
+icons/ ................ ícones da tela inicial
+LEIA-ME.txt ........... este guia
+
+
+1) USAR NO COMPUTADOR (SEM PUBLICAR)
+------------------------------------
+- Dê dois cliques no index.html. Ele abre no Chrome ou Edge e já funciona.
+- Os dados ficam guardados no navegador deste computador.
+- Desse jeito não dá para "instalar como app" — para isso, publique (item 2).
+- Importante: use sempre o MESMO navegador. Chrome e Edge guardam dados
+  separados.
+
+
+2) PUBLICAR NA SQUARE CLOUD
+---------------------------
+1. Compacte o CONTEÚDO desta pasta em .zip (o index.html precisa ficar
+   na raiz do zip, não dentro de outra pasta).
+   No Windows: entre na pasta, selecione tudo (Ctrl+A), clique com o botão
+   direito > Compactar para arquivo ZIP.
+2. No painel da Square Cloud, clique em "Upload Application" e envie o .zip.
+3. Dê um nome, aponte o index.html como arquivo principal, defina a
+   memória em 512 MB (mínimo para site, é suficiente) e marque a
+   publicação web para escolher o endereço (ex.: minha-agenda.squareweb.app).
+4. O painel cria sozinho o arquivo de configuração e o certificado HTTPS.
+
+Seus dados NÃO vão para a Square Cloud. O site só entrega o "programa";
+as demandas e anexos ficam no aparelho de quem usa. Quem abrir o link
+vê uma agenda vazia.
+
+
+3) INSTALAR NO CELULAR
+----------------------
+Android (Chrome): abra o endereço > menu ⋮ > "Instalar app"
+                  (ou "Adicionar à tela inicial").
+iPhone (Safari):  abra o endereço > botão Compartilhar > "Adicionar à
+                  Tela de Início" > Adicionar.
+Depois de instalado, abre pelo ícone e funciona sem internet.
+
+
+4) LEVAR OS DADOS DE UM APARELHO PARA O OUTRO
+---------------------------------------------
+Computador e celular NÃO sincronizam sozinhos. Para levar os dados:
+1. No aparelho de origem: Mais opções > Exportar backup (gera um .json).
+2. Envie o arquivo para o outro aparelho (WhatsApp, e-mail, Drive, cabo).
+3. No aparelho de destino: Mais opções > Importar backup >
+   - "Mesclar": junta os dados; se a mesma demanda existir nos dois,
+     fica a versão editada por último.
+   - "Substituir tudo": apaga o que tem no aparelho e coloca o backup.
+
+Faça backup com frequência: se o histórico/dados do navegador forem
+apagados, a agenda some junto. A agenda lembra você a cada 7 dias.
+
+
+5) PUBLICAR UMA VERSÃO NOVA
+---------------------------
+1. Edite o index.html.
+2. Abra o service-worker.js e aumente o número da versão:
+   const VERSAO = 'agenda-v1.2.0';  ->  'agenda-v1.2.1'
+3. Envie o novo .zip na Square Cloud (substituindo o anterior).
+Quem já usa vai ver o aviso "Nova versão disponível — Atualizar".
+
+
+6) ROTEIRO DE TESTES (faça uma vez depois de publicar)
+------------------------------------------------------
+[ ] Criar uma demanda com início hoje e conclusão daqui a 3 dias.
+[ ] Ver a barra no Calendário (Mês) e na Linha do tempo (Semana).
+[ ] Tocar num dia do calendário e criar uma demanda já com aquela data.
+[ ] Criar uma demanda com conclusão no passado -> deve aparecer em
+    vermelho e no contador "atrasadas".
+[ ] Anexar uma foto grande -> deve mostrar "X KB (era Y MB)".
+[ ] Anexar um PDF e um Excel -> o tamanho deve ficar igual ao original.
+[ ] Abrir o PDF e a foto pelo ícone do olho; baixar o Excel.
+[ ] No Quadro, arrastar um cartão para "Concluído"
+    (no celular: tocar, segurar meio segundo e arrastar).
+[ ] Na Lista, testar os filtros Hoje / Atrasadas / Próximos 7 dias
+    e a busca por texto.
+[ ] Trocar o tema (claro/escuro) no botão do topo.
+[ ] Exportar o backup no computador e importar no celular (Mesclar).
+[ ] Instalar no celular, ativar o modo avião e abrir o app.
+[ ] Criar uma demanda com Repetição "Todos os dias" e marcar "feito".
+[ ] Na aba Arquivos, enviar um PDF e uma foto e criar uma pasta.
+[ ] Buscar no topo uma palavra sem acento (ex.: "orcamento").
+[ ] Em Mais opções > Alertas, ativar a notificação e "Testar lembrete".
+
+
+DICAS
+-----
+- Anexos acima de 20 MB pedem confirmação, para não lotar o aparelho.
+- No iPhone o espaço do navegador é menor; prefira fotos (que já são
+  reduzidas) e mantenha backups em dia.
+- No Android, se um PDF não aparecer na visualização, use "Abrir em
+  nova aba" ou "Baixar".
+- Notificações do navegador só funcionam com a agenda aberta por https
+  (publicada). Aberta direto do computador, use o "Lembrete na tela".
+- Lembretes e notificações só aparecem com a agenda aberta ou em
+  segundo plano; o app não toca alarme com ele fechado.
+- Os dados (demandas, anexos e Arquivos) ficam no navegador de cada
+  pessoa, não na Square Cloud. Para passar demandas a alguém, use o
+  backup (Exportar / Importar).
